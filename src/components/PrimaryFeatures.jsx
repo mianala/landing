@@ -13,12 +13,14 @@ import {
   closestCenter,
 } from '@dnd-kit/core'
 
+import { CSS } from '@dnd-kit/utilities'
+
 import {
+  useSortable,
   SortableContext,
   verticalListSortingStrategy,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable'
-import { SortableItem } from '@dnd-kit/sortable'
 
 import { useQuill } from 'react-quilljs'
 // or const { useQuill } = require('react-quilljs');
@@ -38,21 +40,21 @@ const features = [
   {
     name: 'Create Your Unique Performance Playlists',
     description:
-      'Setting up your perfect performance is as easy as a tap. Create new playlists, choose your favorite emoji for each, and set the D-day - your performance day. Modify or delete your playlists anytime with just a few taps.',
+      'Setting up your perfect performance is as easy as a tap. Adding tracks to your playlists is a breeze. Want to reorder your tracks? Simply drag and drop! ',
     icon: DeviceUserIcon,
-    screen: InviteScreen,
+    screen: StocksScreen,
   },
   {
     name: 'Customize Your Tracks',
     description:
-      'Adding tracks to your playlists is a breeze with The Playlist. Fill in your track details and customize your lyrics and notes as per your needs. Want to reorder your tracks? Simply drag and drop! No more hunting for tracks; add your existing songs from your repertoire directly to your playlist.',
+      'Fill in your track details and customize your lyrics and notes as per your needs. No more hunting for tracks; add your existing songs from your repertoire directly to your playlist.',
     icon: DeviceNotificationIcon,
-    screen: StocksScreen,
+    screen: InviteScreen,
   },
   {
     name: 'Perform Like A Pro',
     description:
-      'Navigating through your performance has never been easier. Tap on a song to start performing, swipe left for the next song, and swipe right to go back to the previous song. Customize your lyrics font size for an effortless reading experience during your performance.',
+      'Navigating through your performance has never been easier. Tap on a song to start performing, swipe left for the next song, and swipe right to go back to the previous song. ',
     icon: DeviceTouchIcon,
     screen: InvestScreen,
   },
@@ -270,41 +272,49 @@ function StocksScreen({ custom, animated = false }) {
       title: 'September',
       key: 'Bb',
       bpm: 126,
+      order: 1,
     },
     {
       title: 'I Want You Back',
       key: 'Ab',
       bpm: 98,
+      order: 2,
     },
     {
       title: 'Uptown Funk',
       key: 'Dm',
       bpm: 115,
+      order: 3,
     },
     {
       title: 'Billie Jean',
       key: 'F#m',
       bpm: 117,
+      order: 4,
     },
     {
       title: "Don't Stop Believin'",
       key: 'E',
       bpm: 120,
+      order: 5,
     },
     {
       title: "Sweet Child O' Mine",
       key: 'D',
       bpm: 125,
+      order: 6,
     },
     {
       title: "Livin' on a Prayer",
       key: 'Bbm',
       bpm: 122,
+      order: 7,
     },
     {
       title: 'Bohemian Rhapsody',
       key: 'Bb',
       bpm: 72,
+      order: 8,
     },
   ])
 
@@ -322,7 +332,6 @@ function StocksScreen({ custom, animated = false }) {
       setSongs((songs) => {
         const oldIndex = songs.findIndex((song) => song.title === active.id)
         const newIndex = songs.findIndex((song) => song.title === over.id)
-
         return arrayMove(songs, oldIndex, newIndex)
       })
     }
@@ -338,12 +347,16 @@ function StocksScreen({ custom, animated = false }) {
         <div className="divide-y divide-gray-100">
           <DndContext
             sensors={sensors}
+            items={songs}
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
           >
             <SortableContext
-              items={songs.map((song) => song.title)}
+              items={[...songs]
+                .sort((a, b) => a.order - b.order)
+                .map((song) => song.title)}
               strategy={verticalListSortingStrategy}
+              describedById="DndDescribedBy"
             >
               {songs.map((song, index) => (
                 <SortableItem key={song.title} id={song.title}>
@@ -369,52 +382,61 @@ function StocksScreen({ custom, animated = false }) {
   )
 }
 
+function arrayMove(array, oldIndex, newIndex) {
+  if (newIndex >= array.length) {
+    let k = newIndex - array.length + 1
+    while (k--) {
+      array.push(undefined)
+    }
+  }
+  array.splice(newIndex, 0, array.splice(oldIndex, 1)[0])
+  return array.map((song, index) => ({
+    ...song,
+    order: index + 1,
+  }))
+}
+
+function SortableItem(props) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: props.id,
+    })
+
+  const style = {
+    transform: transform ? CSS.Transform.toString(transform) : undefined,
+    transition,
+  }
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      {props.children}
+    </div>
+  )
+}
+
 function InvestScreen({ custom, animated = false }) {
   return (
     <AppScreen className="w-full">
       <MotionAppScreenHeader {...(animated ? headerAnimation : {})}>
-        <AppScreen.Title>Buy $LA</AppScreen.Title>
+        <AppScreen.Title>Autumn Leaves</AppScreen.Title>
         <AppScreen.Subtitle>
-          <span className="text-white">$34.28</span> per share
+          Next song: <span className="text-white">A Train</span>
         </AppScreen.Subtitle>
       </MotionAppScreenHeader>
       <MotionAppScreenBody {...(animated ? { ...bodyAnimation, custom } : {})}>
         <div className="px-4 py-6">
-          <div className="space-y-4">
-            {[
-              { label: 'Number of shares', value: '100' },
-              {
-                label: 'Current market price',
-                value: (
-                  <div className="flex">
-                    $34.28
-                    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
-                      <path
-                        d="M17 15V7H9M17 7 7 17"
-                        stroke="#06B6D4"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                ),
-              },
-              { label: 'Estimated cost', value: '$3,428.00' },
-            ].map((item) => (
-              <div
-                key={item.label}
-                className="flex justify-between border-b border-gray-100 pb-4"
-              >
-                <div className="text-sm text-gray-500">{item.label}</div>
-                <div className="text-sm font-semibold text-gray-900">
-                  {item.value}
-                </div>
-              </div>
-            ))}
-            <div className="rounded-lg bg-cyan-500 px-3 py-2 text-center text-sm font-semibold text-white">
-              Buy shares
-            </div>
+          <div class="rounded  p-4">
+            <p class="font-bold">The falling leaves drift by the window</p>
+            <p>The autumn leaves of red and gold</p>
+            <p class="mt-4">I see your lips, the summer kisses</p>
+            <p>The sun-burned hands I used to hold</p>
+          </div>
+          <div class="mt-4 rounded  p-4">
+            <p class="font-bold">Since you went away the days grow long</p>
+            <p>And soon I’ll hear old winter’s song</p>
+            <p class="mt-4">But I miss you most of all my darling</p>
+            <p class="text-orangeRed underline">
+              When autumn leaves start to fall
+            </p>
           </div>
         </div>
       </MotionAppScreenBody>

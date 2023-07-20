@@ -65,10 +65,10 @@ export default function Register() {
               id="referral-source"
               name="referral_source"
             >
-              <option>AltaVista search</option>
-              <option>Super Bowl commercial</option>
-              <option>Our route 34 city bus ad</option>
-              <option>The “Never Use This” podcast</option>
+              <option>Google Search</option>
+              <option>Facebook</option>
+              <option>Twitter</option>
+              <option>Youtube</option>
             </SelectField>
           </div>
           <Button type="submit" color="cyan" className="mt-8 w-full">

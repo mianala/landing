@@ -35,6 +35,7 @@ const plans = [
     },
     features: [
       'Everything in free',
+      'Verify songs you publish to the library',
       'Synced playlists across devices',
       'Unlimited devices',
       'Access to Web App',
@@ -187,7 +188,7 @@ export function Pricing() {
   let [activePeriod, setActivePeriod] = useState('Monthly')
 
   return (
-    <sectionaaaaaaassssssssasawd
+    <section
       id="pricing"
       aria-labelledby="pricing-title"
       className="border-t border-gray-200 bg-gray-100 py-20 sm:py-32"
@@ -258,6 +259,6 @@ export function Pricing() {
           ))}
         </div>
       </Container>
-    </sectionaaaaaaassssssssasawd>
+    </section>
   )
 }

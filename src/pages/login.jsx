@@ -15,11 +15,11 @@ export default function Login() {
         title="Sign in to account"
         subtitle={
           <>
-            Don’t have an account?{' '}
+            Don’t have an account? Just{' '}
             <Link href="/register" className="text-cyan-600">
-              Sign up
-            </Link>{' '}
-            for a free trial.
+              sign up
+            </Link>
+            .
           </>
         }
       >

@@ -4,7 +4,6 @@ import clsx from 'clsx'
 function Logo(props) {
   return (
     <div className="flex cursor-pointer items-center justify-center gap-5 rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">
-      <img className="h-8 w-auto" src="/favicon.ico" alt="" />
       <span className="text-lg font-bold text-white">The Playlist</span>
     </div>
   )
