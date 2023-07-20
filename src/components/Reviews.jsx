@@ -13,87 +13,87 @@ import { Container } from '@/components/Container'
 
 const reviews = [
   {
-    title: 'It really works.',
-    body: 'I downloaded Pocket today and turned $5000 into $25,000 in half an hour.',
-    author: 'CrazyInvestor',
+    title: 'It really enhances performance.',
+    body: 'I downloaded The Playlist today and it turned my chaotic performance into a seamless masterpiece in half an hour.',
+    author: 'StageMagician',
     rating: 5,
   },
   {
     title: 'You need this app.',
-    body: 'I didn’t understand the stock market at all before Pocket. I still don’t, but at least I’m rich now.',
-    author: 'CluelessButRich',
+    body: 'I didn’t understand managing performances before The Playlist. I still don’t know music theory, but at least my shows are amazing now.',
+    author: 'CluelessButFamous',
     rating: 5,
   },
   {
-    title: 'This shouldn’t be legal.',
-    body: 'Pocket makes it so easy to win big in the stock market that I can’t believe it’s actually legal.',
-    author: 'LivingDaDream',
+    title: 'This makes it so easy.',
+    body: 'The Playlist makes organizing my songs and lyrics so easy that I can’t believe it’s actually free.',
+    author: 'LivingTheDream',
     rating: 5,
   },
   {
-    title: 'Screw financial advisors.',
-    body: 'I barely made any money investing in mutual funds. With Pocket, I’m doubling my net-worth every single month.',
-    author: 'JordanBelfort1962',
+    title: 'Forget about manual organization.',
+    body: 'I barely made it through my performances with paper lyrics. With The Playlist, I’m doubling my show quality every single month.',
+    author: 'RockStar2023',
     rating: 5,
   },
   {
     title: 'I love it!',
-    body: 'I started providing insider information myself and now I get new insider tips every 5 minutes. I don’t even have time to act on all of them. New Lamborghini is being delivered next week!',
-    author: 'MrBurns',
+    body: 'I started creating and managing my own playlists and now I get new song ideas every 5 minutes. I don’t even have time to add all of them. My first concert is being planned next week!',
+    author: 'MrTunes',
     rating: 5,
   },
   {
     title: 'Too good to be true.',
-    body: 'I was making money so fast with Pocket that it felt like a scam. But I sold my shares and withdrew the money and it’s really there, right in my bank account. This app is crazy!',
-    author: 'LazyRich99',
+    body: 'I was improving so fast with The Playlist that it felt like a scam. But I sold out my shows and the money’s really there, right in my bank account. This app is crazy!',
+    author: 'PopKing99',
     rating: 5,
   },
   {
     title: 'Wish I could give 6 stars',
-    body: 'This is literally the most important app you will ever download in your life. Get on this before it’s so popular that everyone else is getting these tips too.',
-    author: 'SarahLuvzCash',
+    body: 'This is literally the most important app you will ever download in your life. Get on this before everyone else is using it too.',
+    author: 'SarahRocks',
     rating: 5,
   },
   {
-    title: 'Bought an island.',
-    body: 'Yeah, you read that right. Want your own island too? Get Pocket.',
-    author: 'ScroogeMcduck',
+    title: 'Headlined a festival.',
+    body: 'Yeah, you read that right. Want to headline your own show too? Get The Playlist.',
+    author: 'FolkHero',
     rating: 5,
   },
   {
-    title: 'No more debt!',
-    body: 'After 2 weeks of trading on Pocket I was debt-free. Why did I even go to school at all when Pocket exists?',
-    author: 'BruceWayne',
+    title: 'No more disorganization!',
+    body: 'After 2 weeks of using The Playlist, my performances were the best they’ve ever been. Why did I even bother with other apps when The Playlist exists?',
+    author: 'BluesMaster',
     rating: 5,
   },
   {
-    title: 'I’m 13 and I’m rich.',
-    body: 'I love that with Pocket’s transaction anonymization I could sign up and start trading when I was 12 years old. I had a million dollars before I had armpit hair!',
-    author: 'RichieRich',
+    title: 'I’m 13 and I’m rocking.',
+    body: 'I love that with The Playlist’s simple interface I could sign up and start managing my performances. I had a flawless set before I even hit puberty!',
+    author: 'KidProdigy',
     rating: 5,
   },
   {
-    title: 'Started an investment firm.',
-    body: 'I charge clients a 3% management fee and just throw all their investments into Pocket. Easy money!',
-    author: 'TheCountOfMonteChristo',
+    title: 'Started a band.',
+    body: 'I organize all our setlists with The Playlist. Easy gigs!',
+    author: 'IndieBandLeader',
     rating: 5,
   },
   {
     title: 'It’s like a superpower.',
-    body: 'Every tip Pocket has sent me has paid off. It’s like playing Blackjack but knowing exactly what card is coming next!',
-    author: 'ClarkKent',
+    body: 'Every song I added to The Playlist improved my performance. It’s like playing a show but knowing exactly what song is coming next!',
+    author: 'DJElectro',
     rating: 5,
   },
   {
     title: 'Quit my job.',
-    body: 'I downloaded Pocket three days ago and quit my job today. I can’t believe no one else thought to build a stock trading app that works this way!',
-    author: 'GeorgeCostanza',
+    body: 'I downloaded The Playlist three days ago and quit my day job today. I can’t believe no one else thought to build a music management app that works this way!',
+    author: 'CountryCowboy',
     rating: 5,
   },
   {
     title: 'Don’t download this app',
-    body: 'Unless you want to have the best life ever! I am literally writing this from a yacht.',
-    author: 'JeffBezos',
+    body: 'Unless you want to have the best performances ever! I am literally writing this from a tour bus.',
+    author: 'HipHopIcon',
     rating: 5,
   },
 ]
@@ -262,10 +262,11 @@ export function Reviews() {
           id="reviews-title"
           className="text-3xl font-medium tracking-tight text-gray-900 sm:text-center"
         >
-          Everyone is changing their life with Pocket.
+          Everyone is changing their life with The Playlist.
         </h2>
         <p className="mt-2 text-lg text-gray-600 sm:text-center">
-          Thousands of people have doubled their net-worth in the last 30 days.
+          Hundreds of artists have doubled their performance efficiency in the
+          last 30 days with The Playlist.
         </p>
         <ReviewGrid />
       </Container>

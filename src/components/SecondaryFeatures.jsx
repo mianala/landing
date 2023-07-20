@@ -4,39 +4,39 @@ import { Container } from '@/components/Container'
 
 const features = [
   {
-    name: 'Invest any amount',
+    name: 'Digitize Paper Lyrics',
     description:
-      'Whether it’s $1 or $1,000,000, we can put your money to work for you.',
+      'Say goodbye to the hassle of paper lyrics. With our Scan Text feature, digitize your lyrics in a snap and add them to your tracks. Make your performance smooth and paperless.',
     icon: DeviceArrowIcon,
   },
   {
-    name: 'Build a balanced portfolio',
+    name: 'Highlighting Lyrics/Notes',
     description:
-      'Invest in different industries to find the most opportunities to win huge.',
+      ' Our app lets you highlight important parts of your lyrics or notes so you can easily see them while performing.',
     icon: DeviceCardsIcon,
   },
   {
-    name: 'Trade in real-time',
+    name: 'Share Playlists with Collaborators',
     description:
-      'Get insider tips on big stock moves and act on them within seconds.',
+      'Take collaboration to the next level with The Playlist. Share your meticulously crafted playlists with your collaborators over WiFi and make your performance truly harmonious.',
     icon: DeviceClockIcon,
   },
   {
-    name: 'Profit from your network',
+    name: 'Manage Your Repertoire',
     description:
-      'Invite new insiders to get tips faster and beat even other Pocket users.',
+      'Keep your music library at your fingertips. Access your repertoire from any playlist, delete a song, or edit your song details anytime, anywhere.',
     icon: DeviceListIcon,
   },
   {
-    name: 'Encrypted and anonymized',
+    name: 'Font Size Adjustment',
     description:
-      'Cutting-edge security technology that even the NSA doesn’t know about keeps you hidden.',
+      'Customizing your lyrics font size for better readability during your performances has never been easier.',
     icon: DeviceLockIcon,
   },
   {
-    name: 'Portfolio tracking',
+    name: 'Swipe Navigation',
     description:
-      'Watch your investments grow exponentially, leaving other investors in the dust.',
+      'Swiftly navigate through your tracks during a performance with a simple swipe left or right.',
     icon: DeviceChartIcon,
   },
 ]
@@ -196,11 +196,12 @@ export function SecondaryFeatures() {
       <Container>
         <div className="mx-auto max-w-2xl sm:text-center">
           <h2 className="text-3xl font-medium tracking-tight text-gray-900">
-            Now is the time to build your portfolio.
+            Begin optimizing your setlists today.
           </h2>
           <p className="mt-2 text-lg text-gray-600">
-            With typical market returns, you have to start young to secure your
-            future. With Pocket, it’s never too late to build your nest egg.
+            Whether you’re an experienced performer or just starting out, it’s
+            never too late to master your setlist management. With The Playlist,
+            make every performance seamless and unforgettable.
           </p>
         </div>
         <ul

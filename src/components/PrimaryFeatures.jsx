@@ -1,46 +1,58 @@
+'use client'
 import { Fragment, useEffect, useId, useRef, useState } from 'react'
 import { Tab } from '@headlessui/react'
 import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useDebouncedCallback } from 'use-debounce'
+import {
+  DndContext,
+  useSensor,
+  useSensors,
+  PointerSensor,
+  KeyboardSensor,
+  closestCenter,
+} from '@dnd-kit/core'
+
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  sortableKeyboardCoordinates,
+} from '@dnd-kit/sortable'
+import { SortableItem } from '@dnd-kit/sortable'
+
+import { useQuill } from 'react-quilljs'
+// or const { useQuill } = require('react-quilljs');
+
+import 'quill/dist/quill.snow.css' // Add css for snow theme
+// or import 'quill/dist/quill.bubble.css'; // Add css for bubble theme
 
 import { AppScreen } from '@/components/AppScreen'
 import { CircleBackground } from '@/components/CircleBackground'
 import { Container } from '@/components/Container'
 import { PhoneFrame } from '@/components/PhoneFrame'
-import {
-  DiageoLogo,
-  LaravelLogo,
-  MirageLogo,
-  ReversableLogo,
-  StatamicLogo,
-  StaticKitLogo,
-  TransistorLogo,
-  TupleLogo,
-} from '@/components/StockLogos'
 
 const MotionAppScreenHeader = motion(AppScreen.Header)
 const MotionAppScreenBody = motion(AppScreen.Body)
 
 const features = [
   {
-    name: 'Invite friends for better returns',
+    name: 'Create Your Unique Performance Playlists',
     description:
-      'For every friend you invite to Pocket, you get insider notifications 5 seconds sooner. And it’s 10 seconds if you invite an insider.',
+      'Setting up your perfect performance is as easy as a tap. Create new playlists, choose your favorite emoji for each, and set the D-day - your performance day. Modify or delete your playlists anytime with just a few taps.',
     icon: DeviceUserIcon,
     screen: InviteScreen,
   },
   {
-    name: 'Notifications on stock dips',
+    name: 'Customize Your Tracks',
     description:
-      'Get a push notification every time we find out something that’s going to lower the share price on your holdings so you can sell before the information hits the public markets.',
+      'Adding tracks to your playlists is a breeze with The Playlist. Fill in your track details and customize your lyrics and notes as per your needs. Want to reorder your tracks? Simply drag and drop! No more hunting for tracks; add your existing songs from your repertoire directly to your playlist.',
     icon: DeviceNotificationIcon,
     screen: StocksScreen,
   },
   {
-    name: 'Invest what you want',
+    name: 'Perform Like A Pro',
     description:
-      'We hide your stock purchases behind thousands of anonymous trading accounts, so suspicious activity can never be traced back to you.',
+      'Navigating through your performance has never been easier. Tap on a song to start performing, swipe left for the next song, and swipe right to go back to the previous song. Customize your lyrics font size for an effortless reading experience during your performance.',
     icon: DeviceTouchIcon,
     screen: InvestScreen,
   },
@@ -168,32 +180,83 @@ const bodyAnimation = {
 }
 
 function InviteScreen({ custom, animated = false }) {
+  const toolbarOptions = [['bold'], [{ color: [] }, { background: [] }]]
+  const { quill, quillRef } = useQuill({
+    modules: {
+      toolbar: toolbarOptions,
+    },
+  })
+
+  useEffect(() => {
+    if (quill) {
+      const delta = [
+        {
+          insert: 'Verse 1 (Eric):\n',
+          attributes: { bold: true, background: '#1E90FF' },
+        },
+        {
+          insert:
+            "We don't know what tomorrow holds,\nBut we know who holds tomorrow.\nKnowing this we'll live above the world and all its sorrows.\nI have prayed for all my life that we would be together.\nServing Him together seems so right.\n",
+        },
+        {
+          insert: 'Chorus (Both):\n',
+          attributes: { bold: true, background: '#D8BFD8' },
+        },
+        {
+          insert:
+            "Oh, oh yes, it's true.\nHe has chosen me for you.\nTake my hand and we'll agree\nThat He has chosen you for me.\n",
+        },
+        {
+          insert: 'Verse 2 (Sue):\n',
+          attributes: { bold: true, background: '#FFC0CB' },
+        },
+        {
+          insert:
+            "Now and then I like to think about the day He saved me.\nAll the love that He bestowed and all the gifts He gave me\nWith all this I praise His name for putting us together\nHe knew we'd be together from the start.\n",
+        },
+        {
+          insert: 'Chorus (Both):\n',
+          attributes: { bold: true, background: '#D8BFD8' },
+        },
+        {
+          insert:
+            "Oh yes, it's true. He has chosen me for you\nTake my hand and we'll agree\nThat He has chosen you for me\n",
+        },
+        {
+          insert: 'Bridge (Both):\n',
+          attributes: { bold: true, background: '#D8BFD8' },
+        },
+        {
+          insert:
+            "He has saved us.\nWashed us white as snow.\nNow we're together.\nCause He has made it so.\n",
+        },
+        {
+          insert: 'Chorus (Both):\n',
+          attributes: { bold: true, background: '#D8BFD8' },
+        },
+        {
+          insert:
+            "Oh yes, it's true.\nHe has chosen me for you\nTake my hand and we'll agree\nThat He has chosen you for me.\n",
+        },
+      ]
+
+      quill.setContents(delta)
+    }
+  }, [quill])
+
   return (
     <AppScreen className="w-full">
       <MotionAppScreenHeader {...(animated ? headerAnimation : {})}>
-        <AppScreen.Title>Invite people</AppScreen.Title>
+        <AppScreen.Title>💍 Wedding Eric & Sue</AppScreen.Title>
         <AppScreen.Subtitle>
-          Get tips <span className="text-white">5s sooner</span> for every
-          invite.
+          First Song:{' '}
+          <span className="text-white">He has chosen you for me</span>
         </AppScreen.Subtitle>
       </MotionAppScreenHeader>
       <MotionAppScreenBody {...(animated ? { ...bodyAnimation, custom } : {})}>
-        <div className="px-4 py-6">
-          <div className="space-y-6">
-            {[
-              { label: 'Full name', value: 'Albert H. Wiggin' },
-              { label: 'Email address', value: 'awiggin@chase.com' },
-            ].map((field) => (
-              <div key={field.label}>
-                <div className="text-sm text-gray-500">{field.label}</div>
-                <div className="mt-2 border-b border-gray-200 pb-2 text-sm text-gray-900">
-                  {field.value}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-6 rounded-lg bg-cyan-500 px-3 py-2 text-center text-sm font-semibold text-white">
-            Invite person
+        <div className="p-3">
+          <div style={{ height: 450 }}>
+            <div ref={quillRef} />
           </div>
         </div>
       </MotionAppScreenBody>
@@ -202,99 +265,104 @@ function InviteScreen({ custom, animated = false }) {
 }
 
 function StocksScreen({ custom, animated = false }) {
+  const [songs, setSongs] = useState([
+    {
+      title: 'September',
+      key: 'Bb',
+      bpm: 126,
+    },
+    {
+      title: 'I Want You Back',
+      key: 'Ab',
+      bpm: 98,
+    },
+    {
+      title: 'Uptown Funk',
+      key: 'Dm',
+      bpm: 115,
+    },
+    {
+      title: 'Billie Jean',
+      key: 'F#m',
+      bpm: 117,
+    },
+    {
+      title: "Don't Stop Believin'",
+      key: 'E',
+      bpm: 120,
+    },
+    {
+      title: "Sweet Child O' Mine",
+      key: 'D',
+      bpm: 125,
+    },
+    {
+      title: "Livin' on a Prayer",
+      key: 'Bbm',
+      bpm: 122,
+    },
+    {
+      title: 'Bohemian Rhapsody',
+      key: 'Bb',
+      bpm: 72,
+    },
+  ])
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  )
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event
+
+    if (active.id !== over.id) {
+      setSongs((songs) => {
+        const oldIndex = songs.findIndex((song) => song.title === active.id)
+        const newIndex = songs.findIndex((song) => song.title === over.id)
+
+        return arrayMove(songs, oldIndex, newIndex)
+      })
+    }
+  }
+
   return (
     <AppScreen className="w-full">
       <MotionAppScreenHeader {...(animated ? headerAnimation : {})}>
-        <AppScreen.Title>Stocks</AppScreen.Title>
-        <AppScreen.Subtitle>March 9, 2022</AppScreen.Subtitle>
+        <AppScreen.Title>🎸 Friday Jam</AppScreen.Title>
+        <AppScreen.Subtitle>in 2 days</AppScreen.Subtitle>
       </MotionAppScreenHeader>
       <MotionAppScreenBody {...(animated ? { ...bodyAnimation, custom } : {})}>
         <div className="divide-y divide-gray-100">
-          {[
-            {
-              name: 'Laravel',
-              price: '4,098.01',
-              change: '+4.98%',
-              color: '#F9322C',
-              logo: LaravelLogo,
-            },
-            {
-              name: 'Tuple',
-              price: '5,451.10',
-              change: '-3.38%',
-              color: '#5A67D8',
-              logo: TupleLogo,
-            },
-            {
-              name: 'Transistor',
-              price: '4,098.41',
-              change: '+6.25%',
-              color: '#2A5B94',
-              logo: TransistorLogo,
-            },
-            {
-              name: 'Diageo',
-              price: '250.65',
-              change: '+1.25%',
-              color: '#3320A7',
-              logo: DiageoLogo,
-            },
-            {
-              name: 'StaticKit',
-              price: '250.65',
-              change: '-3.38%',
-              color: '#2A3034',
-              logo: StaticKitLogo,
-            },
-            {
-              name: 'Statamic',
-              price: '5,040.85',
-              change: '-3.11%',
-              color: '#0EA5E9',
-              logo: StatamicLogo,
-            },
-            {
-              name: 'Mirage',
-              price: '140.44',
-              change: '+9.09%',
-              color: '#16A34A',
-              logo: MirageLogo,
-            },
-            {
-              name: 'Reversable',
-              price: '550.60',
-              change: '-1.25%',
-              color: '#8D8D8D',
-              logo: ReversableLogo,
-            },
-          ].map((stock) => (
-            <div key={stock.name} className="flex items-center gap-4 px-4 py-3">
-              <div
-                className="flex-none rounded-full"
-                style={{ backgroundColor: stock.color }}
-              >
-                <stock.logo className="h-10 w-10" />
-              </div>
-              <div className="flex-auto text-sm text-gray-900">
-                {stock.name}
-              </div>
-              <div className="flex-none text-right">
-                <div className="text-sm font-medium text-gray-900">
-                  {stock.price}
-                </div>
-                <div
-                  className={clsx(
-                    'text-xs leading-5',
-                    stock.change.startsWith('+')
-                      ? 'text-cyan-500'
-                      : 'text-gray-500'
-                  )}
-                >
-                  {stock.change}
-                </div>
-              </div>
-            </div>
-          ))}
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext
+              items={songs.map((song) => song.title)}
+              strategy={verticalListSortingStrategy}
+            >
+              {songs.map((song, index) => (
+                <SortableItem key={song.title} id={song.title}>
+                  <div className="flex items-center gap-4 px-4 py-3">
+                    <div className="flex-none rounded-full">{index + 1}</div>
+
+                    <div className="flex-none">
+                      <div className="text-sm font-medium text-gray-900">
+                        {song.title}
+                      </div>
+                      <div className="text-xs leading-5 text-cyan-500">
+                        {song.key}
+                      </div>
+                    </div>
+                  </div>
+                </SortableItem>
+              ))}
+            </SortableContext>
+          </DndContext>
         </div>
       </MotionAppScreenBody>
     </AppScreen>
@@ -549,13 +617,12 @@ export function PrimaryFeatures() {
       <Container>
         <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-3xl">
           <h2 className="text-3xl font-medium tracking-tight text-white">
-            Every feature you need to win. Try it for yourself.
+            Create Your Unique Performance Playlists.
           </h2>
           <p className="mt-2 text-lg text-gray-400">
-            Pocket was built for investors like you who play by their own rules
-            and aren’t going to let SEC regulations get in the way of their
-            dreams. If other investing tools are afraid to build it, Pocket has
-            it.
+            From tailoring your tracks to sharing your playlists over WiFi, The
+            Playlist is your one-stop destination for a seamless performance
+            experience.
           </p>
         </div>
       </Container>

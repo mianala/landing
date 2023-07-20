@@ -5,62 +5,56 @@ import clsx from 'clsx'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { Logomark } from '@/components/Logo'
-
 const plans = [
   {
-    name: 'Starter',
+    name: 'Free Forever',
     featured: false,
     price: { Monthly: '$0', Annually: '$0' },
-    description:
-      'You’re new to investing but want to do it right. Get started for free.',
+    description: 'Everything you need to get started. Get started for free.',
     button: {
       label: 'Get started for free',
       href: '/register',
     },
     features: [
-      'Commission-free trading',
-      'Multi-layered encryption',
-      'One tip every day',
-      'Invest up to $1,500 each month',
+      'Playlist creation',
+      'Playlist sharing',
+      'Unlimited playlist',
+      'Unlimited tracks',
+      'Unlimited songs',
     ],
     logomarkClassName: 'fill-gray-300',
   },
   {
-    name: 'Investor',
+    name: 'Artist',
     featured: false,
-    price: { Monthly: '$7', Annually: '$70' },
-    description:
-      'You’ve been investing for a while. Invest more and grow your wealth faster.',
+    price: { Monthly: '$3', Annually: '$30' },
+    description: 'Organize more and improve your performances faster.',
     button: {
       label: 'Subscribe',
       href: '/register',
     },
     features: [
-      'Commission-free trading',
-      'Multi-layered encryption',
-      'One tip every hour',
-      'Invest up to $15,000 each month',
-      'Basic transaction anonymization',
+      'Everything in free',
+      'Synced playlists across devices',
+      'Unlimited devices',
+      'Access to Web App',
     ],
     logomarkClassName: 'fill-gray-500',
   },
   {
-    name: 'VIP',
+    name: 'Band',
     featured: true,
-    price: { Monthly: '$199', Annually: '$1,990' },
+    price: { Monthly: '$15', Annually: '$150' },
     description:
-      'You’ve got a huge amount of assets but it’s not enough. To the moon.',
+      'You’re in a band and want everyone to be in sync. For the perfect harmony.',
     button: {
       label: 'Subscribe',
       href: '/register',
     },
     features: [
-      'Commission-free trading',
-      'Multi-layered encryption',
-      'Real-time tip notifications',
-      'No investment limits',
-      'Advanced transaction anonymization',
-      'Automated tax-loss harvesting',
+      'Band playlists & repertoire',
+      'Up to 10 band members',
+      'Access to Web App for all band members',
     ],
     logomarkClassName: 'fill-cyan-500',
   },
@@ -193,7 +187,7 @@ export function Pricing() {
   let [activePeriod, setActivePeriod] = useState('Monthly')
 
   return (
-    <section
+    <sectionaaaaaaassssssssasawd
       id="pricing"
       aria-labelledby="pricing-title"
       className="border-t border-gray-200 bg-gray-100 py-20 sm:py-32"
@@ -264,6 +258,6 @@ export function Pricing() {
           ))}
         </div>
       </Container>
-    </section>
+    </sectionaaaaaaassssssssasawd>
   )
 }
