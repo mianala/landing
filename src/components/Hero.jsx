@@ -1,19 +1,14 @@
 import { useId, useRef, useState } from 'react'
-import Image from 'next/image'
 import clsx from 'clsx'
 import { motion, useInView, useMotionValue } from 'framer-motion'
 
 import { AppScreen } from '@/components/AppScreen'
-import { AppStoreLink } from '@/components/AppStoreLink'
+import { AppStoreLink, PlayStoreLink } from '@/components/AppStoreLink'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { PhoneFrame } from '@/components/PhoneFrame'
-import logoBbc from '@/images/logos/bbc.svg'
-import logoCbs from '@/images/logos/cbs.svg'
 import logoCnn from '@/images/logos/cnn.svg'
-import logoFastCompany from '@/images/logos/fast-company.svg'
 import logoForbes from '@/images/icons8-live.svg'
-import logoHuffpost from '@/images/logos/huffpost.svg'
 import logoTechcrunch from '@/images/logos/techcrunch.svg'
 import logoWired from '@/images/logos/wired.svg'
 
@@ -303,10 +298,10 @@ export function Hero() {
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
           <div className="relative z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-6 xl:col-span-6">
             <h1 className="text-4xl font-medium tracking-tight text-gray-900">
-              Simplify Your Performance.
+              Rock The Stage.
             </h1>
             {/* red underline */}
-            <p className="mt-2 h-1 w-36 bg-red-500"></p>
+            <p className="mt-2 h-1 w-24 bg-red-500"></p>
             <p className="mt-6 text-lg text-gray-600">
               Welcome to The Playlist - the ultimate solution to orchestrate
               your performance effortlessly. Our intuitive, user-friendly mobile
@@ -315,6 +310,7 @@ export function Hero() {
             </p>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4">
               <AppStoreLink />
+              {/* <PlayStoreLink /> */}
               <Button
                 href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                 variant="outline"
